@@ -224,8 +224,8 @@ function edina_tm_portfolio_animation() {
 		var el = jQuery(this);
 		var el2 = el.find('.list_inner');
 		var image = el.find('.image_wrap');
-		var definition = el.find('.definition_portfolio');
-		var definitionH = el.find('.definition_portfolio').outerHeight();
+		// var definition = el.find('.definition_portfolio');
+		// var definitionH = el.find('.definition_portfolio').outerHeight();
 
 		el2.each(function () {
 			var el3 = jQuery(this);

@@ -322,22 +322,21 @@ function HomeScreen(props) {
                 >
                   <ul className="total">
                     <li className="wow fadeIn" data-wow-duration="1.2s">
-                      <a href="https://sidelineswap.com/WileyMaple">
+                      <a href="https://www.teamavsc.org/give">
                         <div className="inner_list">
                           <div className="service_icon">
                             <img
                               className="svg"
-                              src="https://s3-eu-west-1.amazonaws.com/tpd/logos/55d25dce0000ff000582430a/0x0.png"
+                              src="https://www.teamavsc.org/images/aspen-valley-ski-snowboard-club.png"
                               alt=""
                             />
                           </div>
                           <div className="service_title">
-                            <h3>Sideline Swap </h3>
+                            <h3>AVSC </h3>
                           </div>
                           <div className="service_definition">
                             <p>
-                              Need gear? Check me out on Sideline Swap! Or
-                              contact me directly!
+                            Sam Coffey Memorial Scholarship.
                             </p>
                           </div>
                           <span className="first"></span>
@@ -345,7 +344,7 @@ function HomeScreen(props) {
                         </div>
                       </a>
                     </li>
-
+{/* 
                     <li
                       className="wow fadeIn"
                       data-wow-duration="1.2s"
@@ -449,7 +448,7 @@ function HomeScreen(props) {
                           <span className="second"></span>
                         </div>
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>

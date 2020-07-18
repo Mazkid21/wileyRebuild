@@ -13,23 +13,23 @@ function ProductsScreen() {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [brand, setBrand] = useState('');
-  const [image, setImage] = useState('');
-  const [price, setPrice] = useState(0);
+  const [imageUrl, setimageUrl] = useState('');
+  const [headline, setheadline] = useState('');
+  // const [brand, setBrand] = useState('');
+  const [linkUrl, setlinkUrl] = useState('');
+  // const [price, setPrice] = useState(0);
   const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
-  const [countInStock, setCountInStock] = useState(0);
+  // const [countInStock, setCountInStock] = useState(0);
   const showModal = (product) => {
     setId(product._id);
-    setName(product.name);
-    setDescription(product.description);
-    setBrand(product.brand);
-    setImage(product.image);
-    setPrice(product.price);
+    setimageUrl(product.imageUrl);
+    setheadline(product.headline);
+    // setBrand(product.brand);
+    setlinkUrl(product.linkUrl);
+    // setPrice(product.price);
     setCategory(product.category);
-    setCountInStock(product.countInStock);
+    // setCountInStock(product.countInStock);
     setModalVisible(true);
   };
   const uploadImageFile = (e) => {
@@ -44,7 +44,7 @@ function ProductsScreen() {
         },
       })
       .then((response) => {
-        setImage(response.data);
+        setlinkUrl(response.data);
         setUploading(false);
       })
       .catch((response) => {
@@ -60,13 +60,9 @@ function ProductsScreen() {
     dispatch(
       saveProduct({
         _id: id,
-        name,
-        brand,
-        image,
-        price,
-        category,
-        countInStock,
-        description,
+        imageUrl,
+        linkUrl,
+        headline,
       })
     );
   };
@@ -121,38 +117,24 @@ function ProductsScreen() {
           <form onSubmit={submitHandler}>
             <ul className="form-container">
               <li>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="linkUrl">linkUrl</label>
                 <input
-                  required
-                  name="name"
-                  id="name"
-                  value={name}
+                  name="linkUrl"
+                  id="linkUrl"
+                  value={linkUrl}
                   onChange={(e) => {
-                    setName(e.target.value);
+                    setlinkUrl(e.target.value);
                   }}
                 />
               </li>
               <li>
-                <label htmlFor="brand">Brand</label>
+                <label htmlFor="imageUrl">imageUrl (680 X 830)</label>
                 <input
-                  required
-                  name="brand"
-                  id="brand"
-                  value={brand}
+                  name="imageUrl"
+                  id="imageUrl"
+                  value={imageUrl}
                   onChange={(e) => {
-                    setBrand(e.target.value);
-                  }}
-                />
-              </li>
-              <li>
-                <label htmlFor="image">Image (680 X 830)</label>
-                <input
-                  required
-                  name="image"
-                  id="image"
-                  value={image}
-                  onChange={(e) => {
-                    setImage(e.target.value);
+                    setimageUrl(e.target.value);
                   }}
                 />
                 <input
@@ -163,52 +145,14 @@ function ProductsScreen() {
                 {uploading && <div>Uploading...</div>}
               </li>
               <li>
-                <label htmlFor="name">Price</label>
-                <input
-                  required
-                  type="number"
-                  name="price"
-                  id="price"
-                  value={price}
-                  onChange={(e) => {
-                    setPrice(e.target.value);
-                  }}
-                />
-              </li>
-              <li>
-                <label htmlFor="category">Category</label>
-                <input
-                  required
-                  name="category"
-                  id="category"
-                  value={category}
-                  onChange={(e) => {
-                    setCategory(e.target.value);
-                  }}
-                />
-              </li>
-              <li>
-                <label htmlFor="countInStock">Count In Stock</label>
-                <input
-                  required
-                  type="number"
-                  name="countInStock"
-                  id="countInStock"
-                  value={countInStock}
-                  onChange={(e) => {
-                    setCountInStock(e.target.value);
-                  }}
-                />
-              </li>
-              <li>
-                <label htmlFor="description">Description</label>
+                <label htmlFor="headline">headline</label>
                 <textarea
                   required
-                  name="description"
-                  id="description"
-                  value={description}
+                  name="headline"
+                  id="headline"
+                  value={headline}
                   onChange={(e) => {
-                    setDescription(e.target.value);
+                    setheadline(e.target.value);
                   }}
                 />
               </li>
@@ -239,19 +183,18 @@ function ProductsScreen() {
           <thead>
             <tr>
               <th>ID</th>
-              <th>NAME</th>
-              <th>PRICE</th>
-              <th>CATEGORY</th>
-              <th>ACTIONS</th>
+              <th>imageUrl</th>
+              <th>headline</th>
+              <th>linkUrl</th>
             </tr>
           </thead>
           <tbody>
             {products.map((product) => (
               <tr key={product._id}>
                 <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{product.category}</td>
+                <td>{product.imageUrl}</td>
+                <td>{product.headline}</td>
+                <td>{product.linkUrl}</td>
                 <td>
                   <button
                     type="button"

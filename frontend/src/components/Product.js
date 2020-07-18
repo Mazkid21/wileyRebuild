@@ -21,22 +21,22 @@ const Product = props => (
   //   </div>
   // </li>
 
-  <li className={props.name}>
+  <li className="articles" >
     <div className="list_inner">
       <div className="image_wrap">
         <Link to={`/product/${props._id}`}>
-          <img src={props.image} alt="images" />
+          <img src={props.imageUrl} alt="images" />
         </Link>
       </div>
     </div>
     <div className="definition_portfolio">
       <span className="first">
-        <a href={props.brand}>{props.description}</a>
+        <a href={props.linkUrl}>{props.headline}</a>
       </span>
-      <span className="second">
+      {/* <span className="second">
         {' '}
         <Link to={`/product/${props._id}`}>Link to product (blog) page</Link>
-      </span>
+      </span> */}
     </div>
   </li>
 );

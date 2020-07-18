@@ -35,14 +35,10 @@ router.get('/:id', asyncHandler(async (req, res) => {
 }));
 router.post('/', isAuthenticated, isAdmin, asyncHandler(async (req, res) => {
   const product = new Product({
-    name: req.body.name,
-    price: req.body.price,
-    description: req.body.description,
-    countInStock: req.body.countInStock,
-    image: req.body.image,
-    category: req.body.category,
-    brand: req.body.brand,
-    features: req.body.features,
+    imageUrl: req.body.imageUrl,
+    headline: req.body.headline,
+    linkUrl: req.body.linkUrl,
+  
   });
   const newProduct = await product.save();
   res.send({ message: 'Product Created', data: newProduct });
@@ -51,14 +47,10 @@ router.post('/', isAuthenticated, isAdmin, asyncHandler(async (req, res) => {
 router.put('/:id', isAuthenticated, isAdmin, asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
-    product.name = req.body.name || product.name;
-    product.description = req.body.description || product.description;
-    product.price = req.body.price || product.price;
-    product.countInStock = req.body.countInStock || product.countInStock;
-    product.image = req.body.image || product.image;
-    product.category = req.body.category || product.category;
-    product.brand = req.body.brand || product.brand;
-    product.features = req.body.features || product.features;
+    product.imageUrl = req.body.imageUrl || product.imageUrl;
+    product.headline = req.body.headline || product.headline;
+    product.linkUrl = req.body.linkUrl || product.linkUrl;
+  
 
     const updatedProduct = await product.save();
     res.send({ message: 'Product Updated', data: updatedProduct });

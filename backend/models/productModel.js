@@ -21,27 +21,13 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const productSchema = new mongoose.Schema({
-  name: {
+  imageUrl: {
     type: String
   },
-  description: {
+  headline: {
     type: String
   },
-  image: {
-    type: String
-  },
-  price: {
-    type: Number,
-    min: 0
-  },
-  countInStock: {
-    type: Number,
-    min: 0
-  },
-  category: {
-    type: String
-  },
-  brand: {
+  linkUrl: {
     type: String
   },
   reviews: [reviewSchema],
