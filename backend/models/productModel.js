@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
   headline: {
     type: String
   },
-  linkUrl: {
+  blogPost: {
     type: String
   },
   reviews: [reviewSchema],

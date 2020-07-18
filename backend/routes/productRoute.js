@@ -37,7 +37,7 @@ router.post('/', isAuthenticated, isAdmin, asyncHandler(async (req, res) => {
   const product = new Product({
     imageUrl: req.body.imageUrl,
     headline: req.body.headline,
-    linkUrl: req.body.linkUrl,
+    blogPost: req.body.blogPost,
   
   });
   const newProduct = await product.save();
@@ -49,7 +49,7 @@ router.put('/:id', isAuthenticated, isAdmin, asyncHandler(async (req, res) => {
   if (product) {
     product.imageUrl = req.body.imageUrl || product.imageUrl;
     product.headline = req.body.headline || product.headline;
-    product.linkUrl = req.body.linkUrl || product.linkUrl;
+    product.blogPost = req.body.blogPost || product.blogPost;
   
 
     const updatedProduct = await product.save();

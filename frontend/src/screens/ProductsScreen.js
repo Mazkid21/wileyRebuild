@@ -16,7 +16,7 @@ function ProductsScreen() {
   const [imageUrl, setimageUrl] = useState('');
   const [headline, setheadline] = useState('');
   // const [brand, setBrand] = useState('');
-  const [linkUrl, setlinkUrl] = useState('');
+  const [blogPost, setblogPost] = useState('');
   // const [price, setPrice] = useState(0);
   const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -26,7 +26,7 @@ function ProductsScreen() {
     setimageUrl(product.imageUrl);
     setheadline(product.headline);
     // setBrand(product.brand);
-    setlinkUrl(product.linkUrl);
+    setblogPost(product.blogPost);
     // setPrice(product.price);
     setCategory(product.category);
     // setCountInStock(product.countInStock);
@@ -44,7 +44,7 @@ function ProductsScreen() {
         },
       })
       .then((response) => {
-        setlinkUrl(response.data);
+        setblogPost(response.data);
         setUploading(false);
       })
       .catch((response) => {
@@ -61,7 +61,7 @@ function ProductsScreen() {
       saveProduct({
         _id: id,
         imageUrl,
-        linkUrl,
+        blogPost,
         headline,
       })
     );
@@ -116,17 +116,19 @@ function ProductsScreen() {
           {loading && <LoadingBox />}
           <form onSubmit={submitHandler}>
             <ul className="form-container">
-              <li>
-                <label htmlFor="linkUrl">linkUrl</label>
+            <li>
+                <label htmlFor="headline">headline</label>
                 <input
-                  name="linkUrl"
-                  id="linkUrl"
-                  value={linkUrl}
+                  required
+                  name="headline"
+                  id="headline"
+                  value={headline}
                   onChange={(e) => {
-                    setlinkUrl(e.target.value);
+                    setheadline(e.target.value);
                   }}
                 />
               </li>
+              
               <li>
                 <label htmlFor="imageUrl">imageUrl (680 X 830)</label>
                 <input
@@ -145,14 +147,13 @@ function ProductsScreen() {
                 {uploading && <div>Uploading...</div>}
               </li>
               <li>
-                <label htmlFor="headline">headline</label>
+                <label htmlFor="blogPost">blogPost</label>
                 <textarea
-                  required
-                  name="headline"
-                  id="headline"
-                  value={headline}
+                  name="blogPost"
+                  id="blogPost"
+                  value={blogPost}
                   onChange={(e) => {
-                    setheadline(e.target.value);
+                    setblogPost(e.target.value);
                   }}
                 />
               </li>
@@ -185,7 +186,7 @@ function ProductsScreen() {
               <th>ID</th>
               <th>imageUrl</th>
               <th>headline</th>
-              <th>linkUrl</th>
+              <th>blogPost</th>
             </tr>
           </thead>
           <tbody>
@@ -194,7 +195,7 @@ function ProductsScreen() {
                 <td>{product._id}</td>
                 <td>{product.imageUrl}</td>
                 <td>{product.headline}</td>
-                <td>{product.linkUrl}</td>
+                <td>{product.blogPost}</td>
                 <td>
                   <button
                     type="button"

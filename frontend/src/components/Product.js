@@ -31,7 +31,9 @@ const Product = props => (
     </div>
     <div className="definition_portfolio">
       <span className="first">
-        <a href={props.linkUrl}>{props.headline}</a>
+       <Link to={`/product/${props._id}`}>
+        <p>{props.headline}</p>
+        </Link>
       </span>
       {/* <span className="second">
         {' '}

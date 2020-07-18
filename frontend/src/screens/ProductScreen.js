@@ -61,8 +61,11 @@ function ProductScreen(props) {
         </div>
         <div className="details-info">
           <ul>
+          <li>
+              <div>{product.headline}</div>
+            </li>
             <li>
-              <h3>{product.linkUrl}</h3>
+              <h3>{product.blogPost}</h3>
             </li>
             <li>
               <a href="#reviews">
@@ -72,47 +75,10 @@ function ProductScreen(props) {
                 />
               </a>
             </li>
-            <li>
-              Price: <span className="price">${product.price}</span>
-            </li>
-
-            <li>
-              Description:
-              <div>{product.headline}</div>
-            </li>
+           
           </ul>
         </div>
-        <div className="details-actions">
-          <ul>
-            <li>Price: ${product.price}</li>
-            <li>
-              State: {product.countInStock > 0 ? 'InStock' : 'Unavailable'}
-            </li>
-            {product.countInStock && (
-              <li>
-                Qty:
-                <select value={qty} onChange={e => setQty(e.target.value)}>
-                  {[...Array(product.countInStock).keys()].map(x => (
-                    <option key={x + 1} value={x + 1}>
-                      {x + 1}
-                    </option>
-                  ))}
-                </select>
-              </li>
-            )}
-            {product.countInStock && (
-              <li>
-                <button
-                  type="button"
-                  onClick={addToCart}
-                  className="button primary"
-                >
-                  Add to Cart
-                </button>
-              </li>
-            )}
-          </ul>
-        </div>
+        
       </div>
       <div className="content-margined">
         <h2>Reviews</h2>
