@@ -5,7 +5,7 @@ const orderItemSchema = new Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
   qty: { type: Number, required: true },
-  product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+  blog: { type: Schema.Types.ObjectId, ref: 'Blog', required: true },
 });
 const addressSchema = {
   address: { type: String, required: true },

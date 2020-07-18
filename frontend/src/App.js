@@ -2,26 +2,26 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import HomeScreen from './screens/HomeScreen';
-import DetailsScreen from './screens/ProductScreen';
+import DetailsScreen from './screens/BlogScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SigninScreen from './screens/SigninScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import { listProductCategories } from './actions/productActions';
+import { listBlogCategories } from './actions/blogActions';
 import LoadingBox from './components/LoadingBox';
 import ErrorBox from './components/ErrorBox';
-import AdminProductsScreen from './screens/ProductsScreen';
+import AdminBlogsScreen from './screens/BlogsScreen';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
-  const productCategoryList = useSelector(state => state.productCategoryList);
+  const blogCategoryList = useSelector(state => state.blogCategoryList);
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
-  const { categories, loading, error } = productCategoryList;
+  const { categories, loading, error } = blogCategoryList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProductCategories());
+    dispatch(listBlogCategories());
     return () => {
       //
     };
@@ -41,12 +41,12 @@ function App() {
         component={ProfileScreen}
       />
 
-      <Route path="/product/:id" component={DetailsScreen} />
+      <Route path="/blog/:id" component={DetailsScreen} />
 
       <PrivateRoute
         userInfo={userInfo}
-        path="/products"
-        component={AdminProductsScreen}
+        path="/blogs"
+        component={AdminBlogsScreen}
       />
 
       <Route path="/category/:id" component={HomeScreen} />
@@ -72,8 +72,8 @@ function App() {
                     </Link>
                     <ul className="dropdown-content">
                       <li>
-                        <Link className="header-link" to="/products">
-                          Products
+                        <Link className="header-link" to="/blogs">
+                          Blogs
                         </Link>
                       </li>
                       <li>
@@ -135,12 +135,12 @@ function App() {
             component={ProfileScreen}
           />
 
-          <Route path="/product/:id" component={DetailsScreen} />
+          <Route path="/blog/:id" component={DetailsScreen} />
 
           <PrivateRoute
             userInfo={userInfo}
-            path="/products"
-            component={AdminProductsScreen}
+            path="/blogs"
+            component={AdminBlogsScreen}
           />
 
           <Route path="/category/:id" component={HomeScreen} />

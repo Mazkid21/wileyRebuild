@@ -20,7 +20,7 @@ const reviewSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const productSchema = new mongoose.Schema({
+const blogSchema = new mongoose.Schema({
   imageUrl: {
     type: String
   },
@@ -46,6 +46,6 @@ const productSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Blog = mongoose.model('Blog', blogSchema);
 
-export default Product;
+export default Blog;

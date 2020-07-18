@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Product from '../components/Product';
+import Blog from '../components/Blog';
 import LoadingBox from '../components/LoadingBox';
 import ErrorBox from '../components/ErrorBox';
-import { listProducts, listProductCategories } from '../actions/productActions';
+import { listBlogs, listBlogCategories } from '../actions/blogActions';
 
 function HomeScreen(props) {
-  const productCategoryList = useSelector(state => state.productCategoryList);
-  const { categories, loadingg, errorr } = productCategoryList;
+  const blogCategoryList = useSelector(state => state.blogCategoryList);
+  const { categories, loadingg, errorr } = blogCategoryList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProductCategories());
+    dispatch(listBlogCategories());
     return () => {
       //
     };
@@ -20,23 +20,23 @@ function HomeScreen(props) {
 
   const [searchKeyword, setSearchKeyword] = useState('');
   const [sortOrder, setSortOrder] = useState('');
-  const productList = useSelector(state => state.productList);
+  const blogList = useSelector(state => state.blogList);
   useEffect(() => {
-    dispatch(listProducts(category, searchKeyword, sortOrder));
+    dispatch(listBlogs(category, searchKeyword, sortOrder));
     return () => {
       //
     };
   }, [dispatch, category]);
   const searchHandler = e => {
     e.preventDefault();
-    dispatch(listProducts(category, searchKeyword, sortOrder));
+    dispatch(listBlogs(category, searchKeyword, sortOrder));
   };
 
   const sortHandler = e => {
     setSortOrder(e.target.value);
-    dispatch(listProducts(category, searchKeyword, e.target.value));
+    dispatch(listBlogs(category, searchKeyword, e.target.value));
   };
-  const { loading, products, error } = productList;
+  const { loading, blogs, error } = blogList;
   return (
     <div className="edina_tm_wrapper_all">
       <div id="edina_tm_popup_blog">
@@ -430,7 +430,7 @@ function HomeScreen(props) {
                           <div className="service_icon">
                             <img
                               className="svg"
-                              src="https://production-uploads-rallyme.s3.amazonaws.com/uploads/organization/photo/19/standard_logo.png"
+                              src="https://blogion-uploads-rallyme.s3.amazonaws.com/uploads/organization/photo/19/standard_logo.png"
                               alt=""
                             />
                           </div>
@@ -473,7 +473,7 @@ function HomeScreen(props) {
                     All
                   </a>
                 </li>
-                {loading ? (
+                {/* {loading ? (
                   <li>
                     <LoadingBox />
                   </li>
@@ -489,33 +489,33 @@ function HomeScreen(props) {
                       <Link to={`/category/${x}`}>{x}</Link>
                     </li>
                   ))
-                )}
-                {/* <li>
-                  <a href="#" data-filter=".news">
-                    News
+                )} */}
+                <li>
+                  <a href="#" data-filter=".blog">
+                    Blog
                   </a>
                 </li>
                 <li>
-                  <a href="#" data-filter=".photography">
+                  <a href="#" data-filter=".photos">
                     Photos
                   </a>
                 </li>
                 <li>
-                  <a href="#" data-filter=".videos">
-                    Videos
+                  <a href="#" data-filter=".articles">
+                    Articles
                   </a>
-                </li> */}
+                </li>
               </ul>
               {loading ? (
                 <LoadingBox />
               ) : error ? (
                 <ErrorBox message={error} />
-              ) : products.length === 0 ? (
-                <div className="empty-list">There is no products.</div>
+              ) : blogs.length === 0 ? (
+                <div className="empty-list">There is no blogs.</div>
               ) : (
                 <ul className="edina_tm_portfolio_list gallery_zoom">
-                  {products.map(product => (
-                    <Product key={product._id} {...product} />
+                  {blogs.map(blog => (
+                    <Blog key={blog._id} {...blog} />
                   ))}
                 </ul>
               )}

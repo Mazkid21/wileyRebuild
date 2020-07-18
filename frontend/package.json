@@ -25,7 +25,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
+    "blogion": [
       ">0.2%",
       "not dead",
       "not op_mini all"

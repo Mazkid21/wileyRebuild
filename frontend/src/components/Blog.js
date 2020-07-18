@@ -2,44 +2,44 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
 
-const Product = props => (
+const Blog = props => (
   // <li>
-  //   <div className="product">
-  //     <div className="product-image">
-  //       <Link to={`/product/${props._id}`}>
+  //   <div className="blog">
+  //     <div className="blog-image">
+  //       <Link to={`/blog/${props._id}`}>
   //         <img src={props.image} alt="images" />
   //       </Link>
   //     </div>
-  //     <div className="product-name">
-  //       <Link to={`/product/${props._id}`}>{props.name}</Link>
+  //     <div className="blog-name">
+  //       <Link to={`/blog/${props._id}`}>{props.name}</Link>
   //     </div>
-  //     <div className="product-brand">{props.brand}</div>
-  //     <div className="product-price">${props.price}</div>
-  //     <div className="product-rating">
+  //     <div className="blog-brand">{props.brand}</div>
+  //     <div className="blog-price">${props.price}</div>
+  //     <div className="blog-rating">
   //       <Rating value={props.rating} text={`${props.numReviews} reviews`} />
   //     </div>
   //   </div>
   // </li>
 
-  <li className="articles" >
+  <li className="blog" >
     <div className="list_inner">
       <div className="image_wrap">
-        <Link to={`/product/${props._id}`}>
+        <Link to={`/blog/${props._id}`}>
           <img src={props.imageUrl} alt="images" />
         </Link>
       </div>
     </div>
     <div className="definition_portfolio">
       <span className="first">
-       <Link to={`/product/${props._id}`}>
+       <Link to={`/blog/${props._id}`}>
         <p>{props.headline}</p>
         </Link>
       </span>
       {/* <span className="second">
         {' '}
-        <Link to={`/product/${props._id}`}>Link to product (blog) page</Link>
+        <Link to={`/blog/${props._id}`}>Link to blog (blog) page</Link>
       </span> */}
     </div>
   </li>
 );
-export default Product;
+export default Blog;

@@ -4,12 +4,12 @@ import axios from 'axios';
 import LoadingBox from '../components/LoadingBox';
 import ErrorBox from '../components/ErrorBox';
 import {
-  listProducts,
-  saveProduct,
-  deleteProduct,
-} from '../actions/productActions';
+  listBlogs,
+  saveBlog,
+  deleteBlog,
+} from '../actions/blogActions';
 
-function ProductsScreen() {
+function BlogsScreen() {
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [id, setId] = useState('');
@@ -21,15 +21,15 @@ function ProductsScreen() {
   const [category, setCategory] = useState('');
   const [uploading, setUploading] = useState(false);
   // const [countInStock, setCountInStock] = useState(0);
-  const showModal = (product) => {
-    setId(product._id);
-    setimageUrl(product.imageUrl);
-    setheadline(product.headline);
-    // setBrand(product.brand);
-    setblogPost(product.blogPost);
-    // setPrice(product.price);
-    setCategory(product.category);
-    // setCountInStock(product.countInStock);
+  const showModal = (blog) => {
+    setId(blog._id);
+    setimageUrl(blog.imageUrl);
+    setheadline(blog.headline);
+    // setBrand(blog.brand);
+    setblogPost(blog.blogPost);
+    // setPrice(blog.price);
+    setCategory(blog.category);
+    // setCountInStock(blog.countInStock);
     setModalVisible(true);
   };
   const uploadImageFile = (e) => {
@@ -52,13 +52,13 @@ function ProductsScreen() {
         setUploading(false);
       });
   };
-  const deleteHandler = (product) => {
-    dispatch(deleteProduct(product));
+  const deleteHandler = (blog) => {
+    dispatch(deleteBlog(blog));
   };
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      saveProduct({
+      saveBlog({
         _id: id,
         imageUrl,
         blogPost,
@@ -66,28 +66,28 @@ function ProductsScreen() {
       })
     );
   };
-  const productList = useSelector((state) => state.productList);
-  const productSave = useSelector((state) => state.productSave);
-  const productDelete = useSelector((state) => state.productDelete);
+  const blogList = useSelector((state) => state.blogList);
+  const blogSave = useSelector((state) => state.blogSave);
+  const blogDelete = useSelector((state) => state.blogDelete);
 
-  const { loading, products, error } = productList;
+  const { loading, blogs, error } = blogList;
   const {
     loading: loadingSave,
     success: successSave,
     error: errorSave,
-  } = productSave;
+  } = blogSave;
   const {
     loading: loadingDelete,
     success: successDelete,
     error: errorDelete,
-  } = productDelete;
+  } = blogDelete;
 
   useEffect(() => {
     if (successSave) {
       setModalVisible(false);
     }
 
-    dispatch(listProducts());
+    dispatch(listBlogs());
     return () => {
       //
     };
@@ -98,20 +98,20 @@ function ProductsScreen() {
     <ErrorBox message={error} />
   ) : (
     <div className="content content-margined">
-      <div className="products-header">
-        <h3>Products</h3>
+      <div className="blogs-header">
+        <h3>Blogs</h3>
         <button
           type="button"
           className="button primary"
           onClick={() => showModal({})}
         >
-          Create Product
+          Create Blog
         </button>
       </div>
 
       {modalVisible && (
         <div className="modal">
-          <h3>Create Product</h3>
+          <h3>Create Blog</h3>
           {errorSave && <ErrorBox message={error} />}
           {loading && <LoadingBox />}
           <form onSubmit={submitHandler}>
@@ -159,7 +159,7 @@ function ProductsScreen() {
               </li>
               <li>
                 <button type="submit" className="button primary">
-                  {id ? 'Update' : 'Create'} Product
+                  {id ? 'Update' : 'Create'} Blog
                 </button>
               </li>
               <li>
@@ -177,8 +177,8 @@ function ProductsScreen() {
           </form>
         </div>
       )}
-      {products.length === 0 ? (
-        <div className="empty-list">There is no products.</div>
+      {blogs.length === 0 ? (
+        <div className="empty-list">There is no blogs.</div>
       ) : (
         <table>
           <thead>
@@ -190,23 +190,23 @@ function ProductsScreen() {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.imageUrl}</td>
-                <td>{product.headline}</td>
-                <td>{product.blogPost}</td>
+            {blogs.map((blog) => (
+              <tr key={blog._id}>
+                <td>{blog._id}</td>
+                <td>{blog.imageUrl}</td>
+                <td>{blog.headline}</td>
+                <td>{blog.blogPost}</td>
                 <td>
                   <button
                     type="button"
-                    onClick={() => showModal(product)}
+                    onClick={() => showModal(blog)}
                     className="button"
                   >
                     Edit
                   </button>{' '}
                   <button
                     type="button"
-                    onClick={() => deleteHandler(product)}
+                    onClick={() => deleteHandler(blog)}
                     className="button"
                   >
                     Delete
@@ -220,4 +220,4 @@ function ProductsScreen() {
     </div>
   );
 }
-export default ProductsScreen;
+export default BlogsScreen;

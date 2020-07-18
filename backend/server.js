@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import uploadRoute from './routes/uploadRoute';
 import userRoute from './routes/userRoute';
-import productRoute from './routes/productRoute';
+import blogRoute from './routes/blogRoute';
 import orderRoute from './routes/orderRoute';
 import config from './config';
 
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/uploads', uploadRoute);
-app.use('/api/products', productRoute);
+app.use('/api/blogs', blogRoute);
 app.use('/api/users', userRoute);
 app.use('/api/orders', orderRoute);
 

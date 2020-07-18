@@ -10,8 +10,8 @@ router.get(
   isAuthenticated,
   isAdmin,
   asyncHandler(async (req, res) => {
-    const products = await Order.find({}).populate('user');
-    res.send(products);
+    const blogs = await Order.find({}).populate('user');
+    res.send(blogs);
   })
 );
 
@@ -24,8 +24,8 @@ router.get(
   '/mine',
   isAuthenticated,
   asyncHandler(async (req, res) => {
-    const products = await Order.find({ user: req.user._id });
-    res.send(products);
+    const blogs = await Order.find({ user: req.user._id });
+    res.send(blogs);
   })
 );
 
@@ -40,9 +40,9 @@ router.get(
 router.get(
   '/:id',
   asyncHandler(async (req, res) => {
-    const product = await Order.findById(req.params.id);
-    if (product) {
-      res.send(product);
+    const blog = await Order.findById(req.params.id);
+    if (blog) {
+      res.send(blog);
     } else {
       throw Error('Order not found.');
     }
@@ -52,7 +52,7 @@ router.post(
   '/',
   isAuthenticated,
   asyncHandler(async (req, res) => {
-    const product = new Order({
+    const blog = new Order({
       orderItems: req.body.cartItems,
       payment: req.body.payment,
       shipping: req.body.shipping,
@@ -62,7 +62,7 @@ router.post(
       taxPrice: req.body.taxPrice,
       user: req.user._id,
     });
-    const newOrder = await product.save();
+    const newOrder = await blog.save();
     res.send({ message: 'Order Created', data: newOrder });
   })
 );
@@ -110,17 +110,17 @@ router.put(
   isAuthenticated,
   isAdmin,
   asyncHandler(async (req, res) => {
-    const product = await Order.findById(req.params.id);
-    if (product) {
-      product.name = req.body.name || product.name;
-      product.price = req.body.price || product.price;
-      product.countInStock = req.body.countInStock || product.countInStock;
-      product.image = req.body.image || product.image;
-      product.category = req.body.category || product.category;
-      product.brand = req.body.brand || product.brand;
-      product.features = req.body.features || product.features;
+    const blog = await Order.findById(req.params.id);
+    if (blog) {
+      blog.name = req.body.name || blog.name;
+      blog.price = req.body.price || blog.price;
+      blog.countInStock = req.body.countInStock || blog.countInStock;
+      blog.image = req.body.image || blog.image;
+      blog.category = req.body.category || blog.category;
+      blog.brand = req.body.brand || blog.brand;
+      blog.features = req.body.features || blog.features;
 
-      const updatedOrder = await product.save();
+      const updatedOrder = await blog.save();
       res.send({ message: 'Order Updated', data: updatedOrder });
     } else {
       throw Error('Order does not exist.');
@@ -132,9 +132,9 @@ router.delete(
   isAuthenticated,
   isAdmin,
   asyncHandler(async (req, res) => {
-    const product = await Order.findById(req.params.id);
-    if (product) {
-      const removeOrder = await product.remove();
+    const blog = await Order.findById(req.params.id);
+    if (blog) {
+      const removeOrder = await blog.remove();
       res.send({ message: 'Order Deleted', data: removeOrder });
     } else {
       throw Error('Order already removed.');

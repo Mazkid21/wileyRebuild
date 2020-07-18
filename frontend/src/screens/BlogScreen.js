@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoadingBox from '../components/LoadingBox';
 import ErrorBox from '../components/ErrorBox';
-import { detailsProduct, saveProductReview } from '../actions/productActions';
+import { detailsBlog, saveBlogReview } from '../actions/blogActions';
 import Rating from '../components/Rating';
-import { PRODUCT_REVIEW_SAVE_RESET } from '../constants/productConstants';
+import { BLOG_REVIEW_SAVE_RESET } from '../constants/blogConstants';
 
-function ProductScreen(props) {
+function BlogScreen(props) {
   const [qty, setQty] = useState(1);
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('');
@@ -16,12 +16,12 @@ function ProductScreen(props) {
   };
   const dispatch = useDispatch();
 
-  const productReviewSave = useSelector(state => state.productReviewSave);
+  const blogReviewSave = useSelector(state => state.blogReviewSave);
   const {
     loading: loadingSaveReview,
     error: errorSaveReview,
     success: successSaveReview
-  } = productReviewSave;
+  } = blogReviewSave;
 
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
@@ -31,9 +31,9 @@ function ProductScreen(props) {
       setComment('');
       setRating('');
       alert('Review Submitted');
-      dispatch({ type: PRODUCT_REVIEW_SAVE_RESET });
+      dispatch({ type: BLOG_REVIEW_SAVE_RESET });
     } else {
-      dispatch(detailsProduct(props.match.params.id));
+      dispatch(detailsBlog(props.match.params.id));
     }
     return () => {
       //
@@ -41,10 +41,10 @@ function ProductScreen(props) {
   }, [successSaveReview]);
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(saveProductReview(props.match.params.id, { comment, rating }));
+    dispatch(saveBlogReview(props.match.params.id, { comment, rating }));
   };
-  const productDetails = useSelector(state => state.productDetails);
-  const { loading, error, product } = productDetails;
+  const blogDetails = useSelector(state => state.blogDetails);
+  const { loading, error, blog } = blogDetails;
 
   return loading ? (
     <LoadingBox />
@@ -57,21 +57,21 @@ function ProductScreen(props) {
       </div>
       <div className="details">
         <div className="details-image">
-          <img src={product.imageUrl} alt="product" />
+          <img src={blog.imageUrl} alt="blog" />
         </div>
         <div className="details-info">
           <ul>
           <li>
-              <div>{product.headline}</div>
+              <div>{blog.headline}</div>
             </li>
             <li>
-              <h3>{product.blogPost}</h3>
+              <h3>{blog.blogPost}</h3>
             </li>
             <li>
               <a href="#reviews">
                 <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
+                  value={blog.rating}
+                  text={`${blog.numReviews} reviews`}
                 />
               </a>
             </li>
@@ -82,9 +82,9 @@ function ProductScreen(props) {
       </div>
       <div className="content-margined">
         <h2>Reviews</h2>
-        {product.reviews.length === 0 && <div>There is no review.</div>}
+        {blog.reviews.length === 0 && <div>There is no review.</div>}
         <ul id="reviews" className="review">
-          {product.reviews.map(review => (
+          {blog.reviews.map(review => (
             <li key={review._id}>
               <div>
                 <b>{review.name}</b>
@@ -148,4 +148,4 @@ function ProductScreen(props) {
     </div>
   );
 }
-export default ProductScreen;
+export default BlogScreen;
