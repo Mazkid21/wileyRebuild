@@ -10,6 +10,7 @@ import { listBlogCategories } from './actions/blogActions';
 import LoadingBox from './components/LoadingBox';
 import ErrorBox from './components/ErrorBox';
 import AdminBlogsScreen from './screens/BlogsScreen';
+import AdminArticlesScreen from './screens/ArticlesScreen'
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -47,6 +48,12 @@ function App() {
         userInfo={userInfo}
         path="/blogs"
         component={AdminBlogsScreen}
+      />
+
+      <PrivateRoute
+        userInfo={userInfo}
+        path="/articles"
+        component={AdminArticlesScreen}
       />
 
       <Route path="/category/:id" component={HomeScreen} />

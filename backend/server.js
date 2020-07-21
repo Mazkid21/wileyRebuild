@@ -1,12 +1,13 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-// import fileUpload from 'express-fileupload';
+import fileUpload from 'express-fileupload';
 import path from 'path';
 import uploadRoute from './routes/uploadRoute';
 import userRoute from './routes/userRoute';
 import blogRoute from './routes/blogRoute';
 import orderRoute from './routes/orderRoute';
+import articleRoute from './routes/articleRoute';
 import config from './config';
 
 const mongodbUrl = config.MONGODB_URL;
@@ -35,6 +36,7 @@ app.use('/api/uploads', uploadRoute);
 app.use('/api/blogs', blogRoute);
 app.use('/api/users', userRoute);
 app.use('/api/orders', orderRoute);
+app.use('/api/articles', articleRoute);
 
 app.get('/api/config/paypal', (req, res) => {
   res.send(config.PAYPAL_CLIENT_ID);
@@ -54,7 +56,7 @@ app.use((err, req, res, next) => {
   res.send({ message: err.message });
 });
 
-// app.use(fileUpload());
+app.use(fileUpload());
 app.post('/upload', (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');

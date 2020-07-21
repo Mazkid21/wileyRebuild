@@ -13,6 +13,7 @@ import {
   orderPayReducer, orderUpdateReducer, orderDeleteReducer, orderDeliverReducer,
 } from './reducers/orderReducers';
 import { userSigninReducer, userRegisterReducer, userUpdateReducer } from './reducers/userReducers';
+import { articleListReducer, articleSaveReducer, articleDeleteReducer} from './reducers/articleReducers';
 
 const reducers = combineReducers({
   cart: cartReducer,
@@ -33,6 +34,9 @@ const reducers = combineReducers({
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
   userUpdate: userUpdateReducer,
+  articleList: articleListReducer,
+  articleSave: articleSaveReducer,
+  articleDelete: articleDeleteReducer,
 });
 const initialState = {
   cart: {
