@@ -32,7 +32,7 @@ function HomeScreen(props) {
   
   const { loading, blogs, error } = blogList;
 
-  const { loadingg, articles, errorr } = articleList;
+  const { loading:loadingArticles, articles, error: errorArticle } = articleList;
 
 
 
@@ -518,10 +518,10 @@ function HomeScreen(props) {
                   ))}
                 </>
               )}
-              {loading ? (
+              {loadingArticles ? (
                 <LoadingBox />
-              ) : error ? (
-                 <ErrorBox message={error} />
+              ) : errorArticle ? (
+                 <ErrorBox message={errorArticle} />
               ) : articleList.length === 0 ? (
                 <p>there are no articles</p>
               ) : (<>
