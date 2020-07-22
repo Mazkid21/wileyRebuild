@@ -5,38 +5,37 @@ import Blog from '../components/Blog';
 import LoadingBox from '../components/LoadingBox';
 import ErrorBox from '../components/ErrorBox';
 import { listBlogs, listBlogCategories } from '../actions/blogActions';
+import { listArticles } from '../actions/articleActions';
+import Article from '../components/Article';
 
 function HomeScreen(props) {
-  const blogCategoryList = useSelector(state => state.blogCategoryList);
-  const { categories, loadingg, errorr } = blogCategoryList;
+
   const dispatch = useDispatch();
+  const articleList = useSelector((state) => state.articleList);
   useEffect(() => {
-    dispatch(listBlogCategories());
+    dispatch(listArticles());
     return () => {
       //
     };
   }, []);
   const category = props.match.params.id ? props.match.params.id : '';
-
   const [searchKeyword, setSearchKeyword] = useState('');
   const [sortOrder, setSortOrder] = useState('');
   const blogList = useSelector(state => state.blogList);
   useEffect(() => {
     dispatch(listBlogs(category, searchKeyword, sortOrder));
+  
     return () => {
       //
     };
   }, [dispatch, category]);
-  const searchHandler = e => {
-    e.preventDefault();
-    dispatch(listBlogs(category, searchKeyword, sortOrder));
-  };
-
-  const sortHandler = e => {
-    setSortOrder(e.target.value);
-    dispatch(listBlogs(category, searchKeyword, e.target.value));
-  };
+  
   const { loading, blogs, error } = blogList;
+
+  const { loadingg, articles, errorr } = articleList;
+
+
+
   return (
     <div className="edina_tm_wrapper_all">
       <div id="edina_tm_popup_blog">
@@ -501,25 +500,40 @@ function HomeScreen(props) {
                   </a>
                 </li>
                 <li>
-                  <a href="#" data-filter=".articles">
+                  <a href="#" data-filter=".article">
                     Articles
                   </a>
                 </li>
               </ul>
+              <ul className="edina_tm_portfolio_list gallery_zoom">
               {loading ? (
                 <LoadingBox />
               ) : error ? (
                 <ErrorBox message={error} />
               ) : blogs.length === 0 ? (
                 <div className="empty-list">There is no blogs.</div>
-              ) : (
-                <ul className="edina_tm_portfolio_list gallery_zoom">
+              ) : (<>
                   {blogs.map(blog => (
                     <Blog key={blog._id} {...blog} />
                   ))}
-                </ul>
+                </>
               )}
+              {loading ? (
+                <LoadingBox />
+              ) : error ? (
+                 <ErrorBox message={error} />
+              ) : articleList.length === 0 ? (
+                <p>there are no articles</p>
+              ) : (<>
+                  {articles.map((article) => (
+                    <Article key={article._id} {...article} />
+                  ))} 
+                </>
+              )}
+              </ul>
+
             </div>
+      
           </div>
         </div>
 
