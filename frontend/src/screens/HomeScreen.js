@@ -9,7 +9,6 @@ import { listArticles } from '../actions/articleActions';
 import Article from '../components/Article';
 
 function HomeScreen(props) {
-
   const dispatch = useDispatch();
   const articleList = useSelector((state) => state.articleList);
   useEffect(() => {
@@ -21,29 +20,27 @@ function HomeScreen(props) {
   const category = props.match.params.id ? props.match.params.id : '';
   const [searchKeyword, setSearchKeyword] = useState('');
   const [sortOrder, setSortOrder] = useState('');
-  const blogList = useSelector(state => state.blogList);
+  const blogList = useSelector((state) => state.blogList);
   useEffect(() => {
     dispatch(listBlogs(category, searchKeyword, sortOrder));
-  
+
     return () => {
       //
     };
   }, [dispatch, category]);
-  
+
   const { loading, blogs, error } = blogList;
 
-  const { loading:loadingArticles, articles, error: errorArticle } = articleList;
-
-
+  const { loading: loadingArticles, articles, error: errorArticle } = articleList;
 
   return (
     <div className="edina_tm_wrapper_all">
       <div id="edina_tm_popup_blog">
         <div className="container">
-          <div className="inner_popup scrollable"></div>
+          <div className="inner_popup scrollable" />
         </div>
         <span className="close">
-          <a href="#"></a>
+          <a href="#" />
         </span>
       </div>
 
@@ -79,12 +76,12 @@ function HomeScreen(props) {
                   <ul>
                     <li>
                       <a href="https://www.facebook.com/wcmaple">
-                        <i className="xcon-facebook"></i>
+                        <i className="xcon-facebook" />
                       </a>
                     </li>
                     <li>
                       <a href="https://www.instagram.com/wcmaple/">
-                        <i className="xcon-instagram"></i>
+                        <i className="xcon-instagram" />
                       </a>
                     </li>
                   </ul>
@@ -93,7 +90,7 @@ function HomeScreen(props) {
               <div className="edina_tm_trigger">
                 <div className="hamburger hamburger--collapse-r">
                   <div className="hamburger-box">
-                    <div className="hamburger-inner"></div>
+                    <div className="hamburger-inner" />
                   </div>
                 </div>
               </div>
@@ -131,9 +128,9 @@ function HomeScreen(props) {
                 <div
                   className="overlay_image hero jarallax"
                   data-speed="0"
-                ></div>
-                <div className="overlay_video"></div>
-                <div className="overlay_color hero"></div>
+                />
+                <div className="overlay_video" />
+                <div className="overlay_color hero" />
               </div>
               <div className="content hero">
                 <div className="container hero">
@@ -141,7 +138,7 @@ function HomeScreen(props) {
                     <p className="first">
                       I'm Wiley Maple
                       <br />
-                      <span className="edina_tm_animation_text_word"></span>
+                      <span className="edina_tm_animation_text_word" />
                     </p>
                   </div>
                 </div>
@@ -169,8 +166,8 @@ function HomeScreen(props) {
                 src="https://player.vimeo.com/video/300112867?autoplay=1&loop=1"
                 width="640"
                 height="200"
-                frameborder="0"
-              ></iframe>
+                frameBorder="0"
+              />
             </div>
             <div className="edina_tm_about_wrap homepage_second">
               <div className="author_wrap">
@@ -180,11 +177,11 @@ function HomeScreen(props) {
                       src="https://player.vimeo.com/video/300112867?autoplay=1&loop=1"
                       width="640"
                       height="360"
-                      frameborder="0"
+                      frameBorder="0"
                       webkitallowfullscreen
                       mozallowfullscreen
-                      allowfullscreen
-                    ></iframe>
+                      allowFullScreen
+                    />
                   </div>
                 </div>
                 <div className="rightbox">
@@ -212,7 +209,8 @@ function HomeScreen(props) {
                       year, I started breaking through the ranks of the World
                       Cup, scoring points on two of the world’s toughest tracks
                       - Bormio, Italy and Kitzbuhel, Austria. These results
-                      earned me a spot on my first Olympic team.{' '}
+                      earned me a spot on my first Olympic team.
+                      {' '}
                     </p>
                     <p>
                       In PyeongChang, I was the first Aspen athlete to compete
@@ -282,7 +280,7 @@ function HomeScreen(props) {
                         data-wow-delay="0.2s"
                       >
                         <a href="https://www.facebook.com/wcmaple">
-                          <i className="xcon-facebook"></i>
+                          <i className="xcon-facebook" />
                         </a>
                       </li>
                       <li
@@ -291,7 +289,7 @@ function HomeScreen(props) {
                         data-wow-delay="0.8s"
                       >
                         <a href="https://www.instagram.com/wcmaple/">
-                          <i className="xcon-instagram"></i>
+                          <i className="xcon-instagram" />
                         </a>
                       </li>
                     </ul>
@@ -316,7 +314,7 @@ function HomeScreen(props) {
               <div className="edina_tm_services_wrap">
                 <div
                   className="edina_tm_list_wrap"
-                  data-column="5"
+                  data-column="1"
                   data-space="70"
                 >
                   <ul className="total">
@@ -335,15 +333,15 @@ function HomeScreen(props) {
                           </div>
                           <div className="service_definition">
                             <p>
-                            Sam Coffey Memorial Scholarship.
+                              Sam Coffey Memorial Scholarship.
                             </p>
                           </div>
-                          <span className="first"></span>
-                          <span className="second"></span>
+                          <span className="first" />
+                          <span className="second" />
                         </div>
                       </a>
                     </li>
-{/* 
+                    {/*
                     <li
                       className="wow fadeIn"
                       data-wow-duration="1.2s"
@@ -506,34 +504,36 @@ function HomeScreen(props) {
                 </li>
               </ul>
               <ul className="edina_tm_portfolio_list gallery_zoom">
-              {loading ? (
-                <LoadingBox />
-              ) : error ? (
-                <ErrorBox message={error} />
-              ) : blogs.length === 0 ? (
-                <div className="empty-list">There is no blogs.</div>
-              ) : (<>
-                  {blogs.map(blog => (
-                    <Blog key={blog._id} {...blog} />
-                  ))}
-                </>
-              )}
-              {loadingArticles ? (
-                <LoadingBox />
-              ) : errorArticle ? (
-                 <ErrorBox message={errorArticle} />
-              ) : articleList.length === 0 ? (
-                <p>there are no articles</p>
-              ) : (<>
-                  {articles.map((article) => (
-                    <Article key={article._id} {...article} />
-                  ))} 
-                </>
-              )}
+                {loading ? (
+                  <LoadingBox />
+                ) : error ? (
+                  <ErrorBox message={error} />
+                ) : blogs.length === 0 ? (
+                  <div className="empty-list">There is no blogs.</div>
+                ) : (
+                  <>
+                    {blogs.map((blog) => (
+                      <Blog key={blog._id} {...blog} />
+                    ))}
+                  </>
+                )}
+                {loadingArticles ? (
+                  <LoadingBox />
+                ) : errorArticle ? (
+                  <ErrorBox message={errorArticle} />
+                ) : articleList.length === 0 ? (
+                  <p>there are no articles</p>
+                ) : (
+                  <>
+                    {articles.map((article) => (
+                      <Article key={article._id} {...article} />
+                    ))}
+                  </>
+                )}
               </ul>
 
             </div>
-      
+
           </div>
         </div>
 
@@ -559,7 +559,7 @@ function HomeScreen(props) {
             </div>
             <div className="main_input_wrap">
               <form
-                action="./modal/contact.php"
+                action="../../public/modal/contact.php"
                 method="post"
                 className="contact_form"
                 id="contact_form"
@@ -567,7 +567,7 @@ function HomeScreen(props) {
                 <div
                   className="returnmessage"
                   data-success="Your message has been received, We will contact you soon."
-                ></div>
+                />
                 <div className="empty_notice">
                   <span>Please Fill Required Fields</span>
                 </div>
@@ -590,7 +590,7 @@ function HomeScreen(props) {
                   data-wow-duration="1.2s"
                   data-wow-delay="0.6s"
                 >
-                  <textarea id="message" placeholder="Your Message"></textarea>
+                  <textarea id="message" placeholder="Your Message" />
                 </div>
                 <div
                   className="edina_tm_button wow fadeIn"
