@@ -34,9 +34,10 @@ router.post('/', isAuthenticated, isAdmin, asyncHandler(async (req, res) => {
 router.put('/:id', isAuthenticated, isAdmin, asyncHandler(async (req, res) => {
   const article = await Article.findById(req.params.id);
   if (article) {
-    article.imageUrl = req.body.imageUrl || article.imageUrl;
-    article.headline = req.body.headline || article.headline;
-    article.blogPost = req.body.blogPost || article.blogPost;
+    article.articleHeadline = req.body.articleHeadline || article.articleHeadline;
+    article.articleImg = req.body.articleImg || article.articleImg;
+    article.articleLink = req.body.articleLink || article.articleLink;
+    article.publication = req.body.publication || article.publication;
 
     const updatedArticle = await article.save();
     res.send({ message: 'Article Updated', data: updatedArticle });

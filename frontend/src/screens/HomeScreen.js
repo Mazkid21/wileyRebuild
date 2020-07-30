@@ -144,7 +144,7 @@ function HomeScreen(props) {
                 </div>
                 <div className="edina_tm_discover_wrap anchor">
                   <span>
-                    <a href="#about">Discover</a>
+                    <a href="#donate">Discover</a>
                   </span>
                 </div>
               </div>
